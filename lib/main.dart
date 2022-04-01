@@ -97,7 +97,11 @@ class Page1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: ListView(
+        children: [],
+      ),
+    );
   }
 }
 
@@ -126,4 +130,23 @@ class Page4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container();
   }
+}
+
+class Tweet {
+  String userIconUrl;
+  String userName;
+  String userId;
+  String text;
+  String postImage;
+  int replayCount = 0;
+  int retweetCount = 0;
+  int likesCount = 0;
+
+  Tweet({
+    required this.userIconUrl,
+    required this.userName,
+    required this.userId,
+    required this.text,
+    required this.postImage,
+  });
 }
