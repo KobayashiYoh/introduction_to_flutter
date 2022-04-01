@@ -44,6 +44,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.rectangle), // AppBar左のアイコン
+        title: const Icon(Icons.rectangle), // AppBar中央のアイコン
+        actions: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: const Icon(Icons.rectangle), // AppBar右のアイコン
+          ), // Container
+        ], // <Widget>[]
+        foregroundColor: Colors.white, // AppBarのアイコンの色
+        backgroundColor: Colors.blue, // AppBarの背景色
+        centerTitle: true,
+      ), // AppBar
       body: _widgetOptions.elementAt(_selectIndex),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
