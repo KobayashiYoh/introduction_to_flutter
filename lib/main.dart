@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -46,16 +47,21 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.rectangle), // AppBar左のアイコン
+        leading: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(Data.loginUser.iconUrl),
+          ),
+        ),
         title: const Icon(Icons.rectangle), // AppBar中央のアイコン
         actions: <Widget>[
           Container(
             padding: const EdgeInsets.only(right: 16.0),
-            child: const Icon(Icons.rectangle), // AppBar右のアイコン
+            child: const Icon(CupertinoIcons.wand_stars), // AppBar右のアイコン
           ), // Container
         ], // <Widget>[]
-        foregroundColor: Colors.white, // AppBarのアイコンの色
-        backgroundColor: Colors.blue, // AppBarの背景色
+        foregroundColor: Colors.black87, // AppBarのアイコンの色
+        backgroundColor: Colors.white, // AppBarの背景色
         centerTitle: true,
       ), // AppBar
       body: _widgetOptions.elementAt(_selectIndex),
