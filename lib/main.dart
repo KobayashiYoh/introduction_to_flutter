@@ -105,45 +105,79 @@ class _Page1State extends State<Page1> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Row(
-          children: [
-            Text(
-              tweet.userName,
-              style: const TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ), // TextStyle
-            ), // Text
-            const SizedBox(width: 8.0),
-            Text('@${tweet.userId}'),
-            const Text('・1時間'),
-          ],
+        Flexible(
+          child: Row(
+            children: [
+              Text(
+                tweet.userName,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ), // TextStyle
+              ), // Text
+              const SizedBox(width: 8.0),
+              Text('@${tweet.userId}'),
+              const Text('・1時間'),
+            ],
+          ),
         ),
-        const Icon(Icons.rectangle),
+        const Icon(
+          Icons.keyboard_control,
+          size: 20.0,
+          color: Colors.grey,
+        ), // Icon
       ], // <Widget>[]
     ); // Row
+  }
+
+  Widget tweetBody(Tweet tweet) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8.0),
+      child: Text(tweet.text),
+    );
   }
 
   Widget tweetFooter(Tweet tweet) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        tweetFooterItem(Icons.rectangle, tweet.replayCount), // リプライ
-        tweetFooterItem(Icons.rectangle, tweet.retweetCount), // リツイート
-        tweetFooterItem(Icons.rectangle, tweet.likesCount), // いいね
-        const Icon(Icons.rectangle), // 共有
-        const SizedBox.shrink(),
+        tweetFooterItem(Icons.chat_bubble_outline, tweet.replayCount), // リプライ
+        tweetFooterItem(Icons.repeat, tweet.retweetCount), // リツイート
+        tweetFooterItem(Icons.favorite_border, tweet.likesCount), // いいね
+        tweetFooterItem(Icons.upload_outlined, -1), // 共有
       ], // <Widget>[]
     ); // Row
   }
 
   Widget tweetFooterItem(IconData iconData, int count) {
-    return Row(
-      children: <Widget>[
-        Icon(iconData),
-        const SizedBox(width: 8.0),
-        Text(count.toString()),
-      ], // <Widget>[]
+    String countText = '';
+    if (count >= 10000) {
+      countText = '${count / 10000}万';
+    } else if (count > 0) {
+      countText = count.toString();
+    }
+
+    return Expanded(
+      child: Row(
+        children: <Widget>[
+          Icon(
+            iconData,
+            color: Colors.grey,
+            size: 20.0,
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: Text(
+                countText,
+                style: const TextStyle(
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+        ], // <Widget>[]
+      ),
     ); // Row
   }
 
@@ -170,9 +204,9 @@ class _Page1State extends State<Page1> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        tweetHeader(Data.tweetList[index]), // ツイートのHeader
-                        Text(Data.tweetList[index].text), // ツイートのBody
-                        tweetFooter(Data.tweetList[index]), // ツイートのFooter
+                        tweetHeader(Data.tweetList[index]),
+                        tweetBody(Data.tweetList[index]),
+                        tweetFooter(Data.tweetList[index]),
                       ], // <Widget>[]
                     ), // Column
                   ), // Flexible
@@ -250,12 +284,12 @@ class Data {
     Tweet(
       userIconUrl:
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
+      userName: 'nameeeee',
+      userId: 'idddddddd',
       text: 'こんにちは\nはじめまして\nうっひょー',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
+      replayCount: 12,
+      retweetCount: 3,
       likesCount: 0,
     ),
     Tweet(
@@ -265,9 +299,9 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
+      replayCount: 1000000,
+      retweetCount: 100000,
+      likesCount: 10000,
     ),
     Tweet(
       userIconUrl:
@@ -276,9 +310,9 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
+      replayCount: 1000,
+      retweetCount: 100,
+      likesCount: 10,
     ),
     Tweet(
       userIconUrl:
