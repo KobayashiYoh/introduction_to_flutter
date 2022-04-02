@@ -67,27 +67,27 @@ class _BottomNavigationState extends State<BottomNavigation> {
       body: _widgetOptions.elementAt(_selectIndex),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black87,
         items: const <BottomNavigationBarItem>[
           // ----- Page1 -----
           BottomNavigationBarItem(
-            icon: Icon(Icons.rectangle),
+            icon: Icon(CupertinoIcons.home),
             label: 'Page1',
           ), //BottomNavigationBarItem
           // ----- Page2 -----
           BottomNavigationBarItem(
-            icon: Icon(Icons.rectangle),
+            icon: Icon(CupertinoIcons.search),
             label: 'Page2',
           ), //BottomNavigationBarItem
           // ----- Page3 -----
           BottomNavigationBarItem(
-            icon: Icon(Icons.rectangle),
+            icon: Icon(CupertinoIcons.bell),
             label: 'Page3',
           ), //BottomNavigationBarItem
           // ----- Page4 -----
           BottomNavigationBarItem(
-            icon: Icon(Icons.rectangle),
+            icon: Icon(CupertinoIcons.mail),
             label: 'Page4',
           ), //BottomNavigationBarItem
         ],
