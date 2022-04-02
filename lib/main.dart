@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Introduction to Flutter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ), // ThemeData
@@ -107,7 +108,7 @@ class _Page1State extends State<Page1> {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'こんにちは\nはじめまして\nうっひょー',
       postImage: '',
       replayCount: 0,
       retweetCount: 0,
@@ -214,45 +215,96 @@ class _Page1State extends State<Page1> {
     ),
   ]; // ------------------------- ツイートのデータ -------------------------
 
+  Widget tweetHeader(Tweet tweet) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Row(
+          children: [
+            Text(
+              tweet.userName,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ), // TextStyle
+            ), // Text
+            const SizedBox(width: 8.0),
+            Text('@${tweet.userId}'),
+            const Text('・1時間'),
+          ],
+        ),
+        const Icon(Icons.rectangle),
+      ], // <Widget>[]
+    ); // Row
+  }
+
+  Widget tweetFooter(Tweet tweet) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        tweetFooterItem(Icons.rectangle, tweet.replayCount), // リプライ
+        tweetFooterItem(Icons.rectangle, tweet.retweetCount), // リツイート
+        tweetFooterItem(Icons.rectangle, tweet.likesCount), // いいね
+        const Icon(Icons.rectangle), // 共有
+        const SizedBox.shrink(),
+      ], // <Widget>[]
+    ); // Row
+  }
+
+  Widget tweetFooterItem(IconData iconData, int count) {
+    return Row(
+      children: <Widget>[
+        Icon(iconData),
+        const SizedBox(width: 8.0),
+        Text(count.toString()),
+      ], // <Widget>[]
+    ); // Row
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
         itemCount: tweetList.length,
         shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) => Container(
-          padding: const EdgeInsets.all(16.0),
-          child: ListTile(
-            leading: SizedBox(
-              height: 32.0,
-              width: 32.0,
-              child: Image.network(tweetList[index].userIconUrl),
-            ),
-            title: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(tweetList[index].userName),
-                    Text('@${tweetList[index].userId}'),
-                  ],
-                ),
-                Text(tweetList[index].text),
-                Row(
-                  children: <Widget>[
-                    const Icon(Icons.rectangle),
-                    Text(tweetList[index].replayCount.toString()),
-                    const Icon(Icons.rectangle),
-                    Text(tweetList[index].retweetCount.toString()),
-                    const Icon(Icons.rectangle),
-                    Text(tweetList[index].likesCount.toString()),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+        itemBuilder: (BuildContext context, int index) => Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 24.0,
+                    backgroundImage: NetworkImage(tweetList[index].userIconUrl),
+                  ), // CircleAvatar
+                  const SizedBox(width: 8.0),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        tweetHeader(tweetList[index]), // ツイートのHeader
+                        Text(tweetList[index].text), // ツイートのBody
+                        tweetFooter(tweetList[index]), // ツイートのFooter
+                      ], // <Widget>[]
+                    ), // Column
+                  ), // Flexible
+                ], // <Widget>[]
+              ), // Row
+            ), // Container
+            const Divider(),
+          ], // <Widget>[]
+        ), // Column
+      ), // ListView.builder
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        elevation: 0,
+        child: const Icon(
+          Icons.add,
+          size: 32.0,
+        ), // Icon
+      ), // FloatingActionButton
+    ); // Scaffold
   }
 }
 
