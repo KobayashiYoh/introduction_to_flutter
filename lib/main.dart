@@ -50,18 +50,20 @@ class _BottomNavigationState extends State<BottomNavigation> {
         leading: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(Data.loginUser.iconUrl),
+            backgroundImage: NetworkImage(Data.loginUser.iconUrl), // AppBar左の画像
           ),
         ),
-        title: const Icon(Icons.rectangle), // AppBar中央のアイコン
+        title: Image.network(
+          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar中央の画像
+        ),
         actions: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: const Icon(CupertinoIcons.wand_stars), // AppBar右のアイコン
-          ), // Container
-        ], // <Widget>[]
+          Image.network(
+            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar右の画像
+          ),
+        ],
         foregroundColor: Colors.black87, // AppBarのアイコンの色
         backgroundColor: Colors.white, // AppBarの背景色
+        elevation: 0,
         centerTitle: true,
       ), // AppBar
       body: _widgetOptions.elementAt(_selectIndex),
