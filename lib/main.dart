@@ -53,21 +53,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
       tabBuilder: (BuildContext context, int index) {
         switch (index) {
           case 0:
-            return CupertinoTabView(
-              builder: (context) => const CupertinoPageScaffold(child: Page1()),
-            );
+            return CupertinoTabView(builder: (context) => const Page1());
           case 1:
-            return CupertinoTabView(
-              builder: (context) => const CupertinoPageScaffold(child: Page2()),
-            );
+            return CupertinoTabView(builder: (context) => const Page2());
           case 2:
-            return CupertinoTabView(
-              builder: (context) => const CupertinoPageScaffold(child: Page3()),
-            );
+            return CupertinoTabView(builder: (context) => const Page3());
           case 3:
-            return CupertinoTabView(
-              builder: (context) => const CupertinoPageScaffold(child: Page4()),
-            );
+            return CupertinoTabView(builder: (context) => const Page4());
           default:
             return const SizedBox.shrink();
         }
@@ -235,13 +227,16 @@ class _Page1State extends State<Page1> {
           ), // Column
         ),
       ), // ListView.builder
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        elevation: 0,
-        child: const Icon(
-          Icons.add,
-          size: 32.0,
-        ), // Icon
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 48.0),
+        child: FloatingActionButton(
+          onPressed: () {},
+          elevation: 0,
+          child: const Icon(
+            Icons.add, // 画面右下の青いボタン
+            size: 32.0,
+          ),
+        ),
       ), // FloatingActionButton
     ); // Scaffold
   }
