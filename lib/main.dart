@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      ), // ThemeData
+      ),
       home: const BottomNavigation(),
-    ); // MaterialApp
+    );
   }
 }
 
@@ -35,20 +35,20 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        activeColor: Colors.black87,
-        inactiveColor: Colors.black45,
+        activeColor: Colors.black87, //  TabBar・選択アイコンの色
+        inactiveColor: Colors.black45, // TabBar・非選択アイコンの色
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home), // ホームアイコン
+            icon: Icon(CupertinoIcons.home), // TabBar・ホームアイコン
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search), // 検索アイコン
+            icon: Icon(CupertinoIcons.search), // TabBar・検索アイコン
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.bell), // 通知アイコン
+            icon: Icon(CupertinoIcons.bell), // TabBar・通知アイコン
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.mail), // DMアイコン
+            icon: Icon(CupertinoIcons.mail), // TabBar・DMアイコン
           ),
         ],
       ),
@@ -151,24 +151,24 @@ class _Page1State extends State<Page1> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         tweetFooterItem(
-          CupertinoIcons.chat_bubble, // 返信
+          CupertinoIcons.chat_bubble,
           replayCount,
         ),
         tweetFooterItem(
-          CupertinoIcons.arrow_2_squarepath, // リツイート
+          CupertinoIcons.arrow_2_squarepath,
           retweetCount,
         ),
         tweetFooterItem(
-          CupertinoIcons.heart, // いいね
+          CupertinoIcons.heart,
           likesCount,
         ),
         tweetFooterItem(
-          CupertinoIcons.tray_arrow_up, // 共有
+          CupertinoIcons.tray_arrow_up,
           0,
         ),
       ], // <Widget>[]
     ); // Row
-  } // sparkles
+  }
 
   Widget tweetFooterItem(IconData iconData, int count) {
     String countText = countFormatter(count);
@@ -185,15 +185,13 @@ class _Page1State extends State<Page1> {
               padding: const EdgeInsets.only(left: 4.0),
               child: Text(
                 countText,
-                style: const TextStyle(
-                  color: Colors.black54,
-                ),
+                style: const TextStyle(color: Colors.black54),
               ),
             ),
           ),
         ], // <Widget>[]
-      ),
-    ); // Row
+      ), // Row
+    );
   }
 
   @override
@@ -203,19 +201,20 @@ class _Page1State extends State<Page1> {
         leading: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(Data.loginUser.iconUrl), // AppBar左の画像
+            backgroundImage:
+                NetworkImage(Data.loginUser.iconUrl), // AppBar・左の画像
           ),
         ),
         title: Image.network(
-          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar中央の画像
+          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar・中央の画像
         ),
         actions: <Widget>[
           Image.network(
-            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar右の画像
+            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar・右の画像
           ),
         ],
-        foregroundColor: Colors.black87, // AppBarのアイコンの色
-        backgroundColor: Colors.white, // AppBarの背景色
+        foregroundColor: Colors.black87, // AppBar・アイコンの色
+        backgroundColor: Colors.white, // AppBar・背景色
         elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -235,7 +234,7 @@ class _Page1State extends State<Page1> {
                       radius: 24.0,
                       backgroundImage:
                           NetworkImage(Data.tweetList[index].userIconUrl),
-                    ), // CircleAvatar
+                    ),
                     const SizedBox(width: 8.0),
                     Flexible(
                       child: Column(
@@ -246,26 +245,26 @@ class _Page1State extends State<Page1> {
                           tweetFooter(),
                         ], // <Widget>[]
                       ), // Column
-                    ), // Flexible
+                    ),
                   ], // <Widget>[]
                 ), // Row
-              ), // Container
+              ),
               const Divider(),
             ], // <Widget>[]
           ), // Column
         ),
-      ), // ListView.builder
+      ),
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 48.0),
         child: FloatingActionButton(
           onPressed: () {},
           elevation: 0,
           child: const Icon(
-            Icons.add, // 画面右下の青いボタン
+            Icons.add, // FloatingActionButton（画面右下の青丸ボタン）・新規投稿アイコン
             size: 32.0,
           ),
         ),
-      ), // FloatingActionButton
+      ),
     ); // Scaffold
   }
 }
@@ -307,7 +306,7 @@ class User {
     required this.name,
     required this.id,
   });
-}
+} // class User
 
 class Tweet {
   String userIconUrl;
@@ -323,7 +322,7 @@ class Tweet {
     required this.text,
     required this.postImage,
   });
-}
+} // class Tweet
 
 class Data {
   // ---------------------- ログインユーザーのデータ ---------------------
@@ -332,7 +331,7 @@ class Data {
         'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
     name: 'name',
     id: 'id',
-  );
+  ); // loginUser
 
   // ------------------------- ツイートのデータ -------------------------
   static List<Tweet> tweetList = [
@@ -416,5 +415,5 @@ class Data {
       text: '投稿文',
       postImage: '',
     ),
-  ];
-}
+  ]; // tweetList
+} // class Data
