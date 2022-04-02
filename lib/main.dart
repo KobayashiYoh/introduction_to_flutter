@@ -93,26 +93,43 @@ class _Page1State extends State<Page1> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Flexible(
-          child: Row(
-            children: [
-              Text(
-                tweet.userName,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ), // TextStyle
-              ), // Text
-              const SizedBox(width: 8.0),
-              Text('@${tweet.userId}'),
-              const Text('・1時間'),
-            ],
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.black54,
+              ),
+              children: [
+                TextSpan(
+                  text: tweet.userName,
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const WidgetSpan(
+                  child: SizedBox(width: 8.0),
+                ),
+                TextSpan(
+                  text: '@${tweet.userId}',
+                ),
+                const TextSpan(
+                  text: '・',
+                  style: TextStyle(fontSize: 10.0),
+                ),
+                const TextSpan(text: '1時間'),
+              ],
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         const Icon(
           Icons.keyboard_control,
-          size: 20.0,
+          size: 16.0,
           color: Colors.grey,
-        ), // Icon
+        ),
       ], // <Widget>[]
     ); // Row
   }
@@ -322,8 +339,8 @@ class Data {
     Tweet(
       userIconUrl:
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'nameeeee',
-      userId: 'idddddddd',
+      userName: 'nameeeeeeee',
+      userId: 'idddddddddddddddddddddddddddddd',
       text: 'こんにちは\nはじめまして\nうっひょー',
       postImage: '',
     ),
