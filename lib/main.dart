@@ -29,75 +29,50 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectIndex = 0;
-  final List<Widget> _widgetOptions = <Widget>[
-    const Page1(),
-    const Page2(),
-    const Page3(),
-    const Page4(),
-  ]; // <Widget>[]
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(Data.loginUser.iconUrl), // AppBar左の画像
-          ),
-        ),
-        title: Image.network(
-          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar中央の画像
-        ),
-        actions: <Widget>[
-          Image.network(
-            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar右の画像
-          ),
-        ],
-        foregroundColor: Colors.black87, // AppBarのアイコンの色
-        backgroundColor: Colors.white, // AppBarの背景色
-        elevation: 0,
-        centerTitle: true,
-      ), // AppBar
-      body: _widgetOptions.elementAt(_selectIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black87,
-        unselectedItemColor: Colors.black87,
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        activeColor: Colors.black87,
+        inactiveColor: Colors.black45,
         items: const <BottomNavigationBarItem>[
-          // ----- Page1 -----
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Page1',
-          ), //BottomNavigationBarItem
-          // ----- Page2 -----
+            icon: Icon(CupertinoIcons.home), // ホームアイコン
+          ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search),
-            label: 'Page2',
-          ), //BottomNavigationBarItem
-          // ----- Page3 -----
+            icon: Icon(CupertinoIcons.search), // 検索アイコン
+          ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.bell),
-            label: 'Page3',
-          ), //BottomNavigationBarItem
-          // ----- Page4 -----
+            icon: Icon(CupertinoIcons.bell), // 通知アイコン
+          ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.mail),
-            label: 'Page4',
-          ), //BottomNavigationBarItem
+            icon: Icon(CupertinoIcons.mail), // DMアイコン
+          ),
         ],
-        currentIndex: _selectIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-      ), // BottomNavigation
-    ); // Scaffold
+      ),
+      tabBuilder: (BuildContext context, int index) {
+        switch (index) {
+          case 0:
+            return CupertinoTabView(
+              builder: (context) => const CupertinoPageScaffold(child: Page1()),
+            );
+          case 1:
+            return CupertinoTabView(
+              builder: (context) => const CupertinoPageScaffold(child: Page2()),
+            );
+          case 2:
+            return CupertinoTabView(
+              builder: (context) => const CupertinoPageScaffold(child: Page3()),
+            );
+          case 3:
+            return CupertinoTabView(
+              builder: (context) => const CupertinoPageScaffold(child: Page4()),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
+    );
   }
 }
 
@@ -204,38 +179,61 @@ class _Page1State extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: Data.tweetList.length,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) => Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 24.0,
-                    backgroundImage:
-                        NetworkImage(Data.tweetList[index].userIconUrl),
-                  ), // CircleAvatar
-                  const SizedBox(width: 8.0),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        tweetHeader(Data.tweetList[index]),
-                        tweetBody(Data.tweetList[index]),
-                        tweetFooter(Data.tweetList[index]),
-                      ], // <Widget>[]
-                    ), // Column
-                  ), // Flexible
-                ], // <Widget>[]
-              ), // Row
-            ), // Container
-            const Divider(),
-          ], // <Widget>[]
-        ), // Column
+      appBar: AppBar(
+        leading: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(Data.loginUser.iconUrl), // AppBar左の画像
+          ),
+        ),
+        title: Image.network(
+          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar中央の画像
+        ),
+        actions: <Widget>[
+          Image.network(
+            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar右の画像
+          ),
+        ],
+        foregroundColor: Colors.black87, // AppBarのアイコンの色
+        backgroundColor: Colors.white, // AppBarの背景色
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+      ), // AppBar,
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: Data.tweetList.length,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) => Column(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 24.0,
+                      backgroundImage:
+                          NetworkImage(Data.tweetList[index].userIconUrl),
+                    ), // CircleAvatar
+                    const SizedBox(width: 8.0),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          tweetHeader(Data.tweetList[index]),
+                          tweetBody(Data.tweetList[index]),
+                          tweetFooter(Data.tweetList[index]),
+                        ], // <Widget>[]
+                      ), // Column
+                    ), // Flexible
+                  ], // <Widget>[]
+                ), // Row
+              ), // Container
+              const Divider(),
+            ], // <Widget>[]
+          ), // Column
+        ),
       ), // ListView.builder
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
