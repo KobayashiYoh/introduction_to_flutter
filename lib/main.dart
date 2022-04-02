@@ -256,6 +256,18 @@ class Page4 extends StatelessWidget {
   }
 }
 
+class User {
+  String iconUrl;
+  String name;
+  String id;
+
+  User({
+    required this.iconUrl,
+    required this.name,
+    required this.id,
+  });
+}
+
 class Tweet {
   String userIconUrl;
   String userName;
@@ -279,6 +291,14 @@ class Tweet {
 }
 
 class Data {
+  // ---------------------- ログインユーザーのデータ ---------------------
+  static User loginUser = User(
+    iconUrl:
+        'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+    name: 'name',
+    id: 'id',
+  );
+
   // ------------------------- ツイートのデータ -------------------------
   static List<Tweet> tweetList = [
     Tweet(
@@ -391,6 +411,5 @@ class Data {
       retweetCount: 0,
       likesCount: 0,
     ),
-  ]; // ------------------------- ツイートのデータ -------------------------
-
+  ];
 }
