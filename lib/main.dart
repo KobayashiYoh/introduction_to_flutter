@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -112,21 +114,26 @@ class _Page1State extends State<Page1> {
     );
   }
 
-  Widget tweetFooter(Tweet tweet) {
+  Widget tweetFooter() {
+    var rand = math.Random();
+    int replayCount = rand.nextInt(1000);
+    int retweetCount = rand.nextInt(10000) + replayCount;
+    int likesCount = rand.nextInt(1000000) + retweetCount;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         tweetFooterItem(
           CupertinoIcons.chat_bubble, // 返信
-          tweet.replayCount,
+          replayCount,
         ),
         tweetFooterItem(
           CupertinoIcons.arrow_2_squarepath, // リツイート
-          tweet.retweetCount,
+          retweetCount,
         ),
         tweetFooterItem(
           CupertinoIcons.heart, // いいね
-          tweet.likesCount,
+          likesCount,
         ),
         tweetFooterItem(
           CupertinoIcons.tray_arrow_up, // 共有
@@ -215,7 +222,7 @@ class _Page1State extends State<Page1> {
                         children: <Widget>[
                           tweetHeader(Data.tweetList[index]),
                           tweetBody(Data.tweetList[index]),
-                          tweetFooter(Data.tweetList[index]),
+                          tweetFooter(),
                         ], // <Widget>[]
                       ), // Column
                     ), // Flexible
@@ -287,9 +294,6 @@ class Tweet {
   String userId;
   String text;
   String postImage;
-  int replayCount;
-  int retweetCount;
-  int likesCount;
 
   Tweet({
     required this.userIconUrl,
@@ -297,9 +301,6 @@ class Tweet {
     required this.userId,
     required this.text,
     required this.postImage,
-    required this.replayCount,
-    required this.retweetCount,
-    required this.likesCount,
   });
 }
 
@@ -321,9 +322,6 @@ class Data {
       userId: 'idddddddd',
       text: 'こんにちは\nはじめまして\nうっひょー',
       postImage: '',
-      replayCount: 12,
-      retweetCount: 3,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -332,9 +330,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 1000000,
-      retweetCount: 100000,
-      likesCount: 10000,
     ),
     Tweet(
       userIconUrl:
@@ -343,9 +338,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 1000,
-      retweetCount: 100,
-      likesCount: 10,
     ),
     Tweet(
       userIconUrl:
@@ -354,9 +346,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -365,9 +354,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -376,9 +362,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -387,9 +370,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -398,9 +378,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -409,9 +386,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
     Tweet(
       userIconUrl:
@@ -420,9 +394,6 @@ class Data {
       userId: 'id',
       text: '投稿文',
       postImage: '',
-      replayCount: 0,
-      retweetCount: 0,
-      likesCount: 0,
     ),
   ];
 }
