@@ -147,13 +147,25 @@ class _Page1State extends State<Page1> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        tweetFooterItem(Icons.chat_bubble_outline, tweet.replayCount), // リプライ
-        tweetFooterItem(Icons.repeat, tweet.retweetCount), // リツイート
-        tweetFooterItem(Icons.favorite_border, tweet.likesCount), // いいね
-        tweetFooterItem(Icons.upload_outlined, -1), // 共有
+        tweetFooterItem(
+          CupertinoIcons.chat_bubble, // 返信
+          tweet.replayCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.arrow_2_squarepath, // リツイート
+          tweet.retweetCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.heart, // いいね
+          tweet.likesCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.tray_arrow_up, // 共有
+          0,
+        ),
       ], // <Widget>[]
     ); // Row
-  }
+  } // sparkles
 
   Widget tweetFooterItem(IconData iconData, int count) {
     String countText = '';
