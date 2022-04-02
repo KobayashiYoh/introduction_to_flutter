@@ -78,6 +78,16 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
+  String countFormatter(int count) {
+    String countText = '';
+    if (count >= 10000) {
+      countText = '${(count / 10000).toStringAsFixed(1)}万';
+    } else if (count > 0) {
+      countText = count.toString();
+    }
+    return countText;
+  }
+
   Widget tweetHeader(Tweet tweet) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -144,19 +154,13 @@ class _Page1State extends State<Page1> {
   } // sparkles
 
   Widget tweetFooterItem(IconData iconData, int count) {
-    String countText = '';
-    if (count >= 10000) {
-      countText = '${count / 10000}万';
-    } else if (count > 0) {
-      countText = count.toString();
-    }
-
+    String countText = countFormatter(count);
     return Expanded(
       child: Row(
         children: <Widget>[
           Icon(
             iconData,
-            color: Colors.grey,
+            color: Colors.black54,
             size: 20.0,
           ),
           Expanded(
@@ -165,7 +169,7 @@ class _Page1State extends State<Page1> {
               child: Text(
                 countText,
                 style: const TextStyle(
-                  color: Colors.black87,
+                  color: Colors.black54,
                 ),
               ),
             ),
