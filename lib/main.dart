@@ -92,14 +92,165 @@ class _BottomNavigationState extends State<BottomNavigation> {
   }
 }
 
-class Page1 extends StatelessWidget {
+class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
+
+  @override
+  State<Page1> createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  // ------------------------- ツイートのデータ -------------------------
+  List<Tweet> tweetList = [
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+    Tweet(
+      userIconUrl:
+          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userName: 'name',
+      userId: 'id',
+      text: '投稿文',
+      postImage: '',
+      replayCount: 0,
+      retweetCount: 0,
+      likesCount: 0,
+    ),
+  ]; // ------------------------- ツイートのデータ -------------------------
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [],
+      body: ListView.builder(
+        itemCount: tweetList.length,
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) => Container(
+          padding: const EdgeInsets.all(16.0),
+          child: ListTile(
+            leading: SizedBox(
+              height: 32.0,
+              width: 32.0,
+              child: Image.network(tweetList[index].userIconUrl),
+            ),
+            title: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(tweetList[index].userName),
+                    Text('@${tweetList[index].userId}'),
+                  ],
+                ),
+                Text(tweetList[index].text),
+                Row(
+                  children: <Widget>[
+                    const Icon(Icons.rectangle),
+                    Text(tweetList[index].replayCount.toString()),
+                    const Icon(Icons.rectangle),
+                    Text(tweetList[index].retweetCount.toString()),
+                    const Icon(Icons.rectangle),
+                    Text(tweetList[index].likesCount.toString()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -138,9 +289,9 @@ class Tweet {
   String userId;
   String text;
   String postImage;
-  int replayCount = 0;
-  int retweetCount = 0;
-  int likesCount = 0;
+  int replayCount;
+  int retweetCount;
+  int likesCount;
 
   Tweet({
     required this.userIconUrl,
@@ -148,5 +299,8 @@ class Tweet {
     required this.userId,
     required this.text,
     required this.postImage,
+    required this.replayCount,
+    required this.retweetCount,
+    required this.likesCount,
   });
 }
