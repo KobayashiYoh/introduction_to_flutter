@@ -31,6 +31,18 @@ class TwitterHomePage extends StatefulWidget {
 }
 
 class _TwitterHomePageState extends State<TwitterHomePage> {
+  String timeFormatter(int seconds) {
+    String timeText = '$seconds秒';
+    if (seconds >= 86400) {
+      timeText = '${seconds ~/ 86400}日';
+    } else if (seconds >= 3600) {
+      timeText = '${seconds ~/ 3600}時間';
+    } else if (seconds >= 60) {
+      timeText = '${seconds ~/ 60}分';
+    }
+    return timeText;
+  }
+
   String countFormatter(int count) {
     String countText = '';
     if (count >= 10000) {
@@ -78,6 +90,8 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
   }
 
   Widget tweetHeader(Tweet tweet) {
+    var rand = math.Random();
+    int seconds = rand.nextInt(300000);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -107,7 +121,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
                   text: '・',
                   style: TextStyle(fontSize: 10.0),
                 ),
-                const TextSpan(text: '1時間'),
+                TextSpan(text: timeFormatter(seconds)),
               ],
             ),
             maxLines: 1,
