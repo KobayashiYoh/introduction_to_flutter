@@ -41,6 +41,35 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     return countText;
   }
 
+  PreferredSizeWidget twitterAppBar({
+    required Color backgroundColor,
+    required String lightImageUrl,
+    required String centerImageUrl,
+    required String rightImageUrl,
+  }) {
+    return AppBar(
+      leading: Container(
+        padding: const EdgeInsets.all(12.0),
+        child: CircleAvatar(
+          radius: 8.0,
+          backgroundImage: NetworkImage(lightImageUrl),
+        ),
+      ),
+      title: SizedBox(
+        width: 44.0,
+        height: 44.0,
+        child: Image.network(centerImageUrl),
+      ),
+      actions: <Widget>[
+        Image.network(rightImageUrl),
+      ],
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      centerTitle: true,
+    );
+  }
+
   Widget tweetImage(Tweet tweet) {
     return CircleAvatar(
       radius: 20.0,
@@ -57,7 +86,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
             text: TextSpan(
               style: const TextStyle(
                 fontSize: 12.0,
-                color: Colors.black54,
+                color: Colors.black87,
               ),
               children: [
                 TextSpan(
@@ -97,7 +126,10 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
   Widget tweetBody(Tweet tweet) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8.0),
-      child: Text(tweet.text),
+      child: Text(
+        tweet.text,
+        style: const TextStyle(fontSize: 12.0),
+      ),
     );
   }
 
@@ -108,15 +140,15 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
         children: <Widget>[
           Icon(
             iconData,
-            color: Colors.black54,
-            size: 20.0,
+            color: Colors.black87,
+            size: 16.0,
           ),
           Expanded(
             child: Container(
               padding: const EdgeInsets.only(left: 4.0),
               child: Text(
                 countText,
-                style: const TextStyle(color: Colors.black54),
+                style: const TextStyle(color: Colors.black87, fontSize: 12.0),
               ),
             ),
           ),
@@ -127,9 +159,9 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
 
   Widget tweetFooter() {
     var rand = math.Random();
-    int replayCount = rand.nextInt(1000);
+    int replayCount = rand.nextInt(500);
     int retweetCount = rand.nextInt(10000) + replayCount;
-    int likesCount = rand.nextInt(1000000) + retweetCount;
+    int likesCount = rand.nextInt(90000) + retweetCount;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -153,31 +185,6 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     ); // Row
   }
 
-  PreferredSizeWidget twitterAppBar({
-    required Color backgroundColor,
-    required String lightImageUrl,
-    required String centerImageUrl,
-    required String rightImageUrl,
-  }) {
-    return AppBar(
-      leading: Container(
-        padding: const EdgeInsets.all(12.0),
-        child: CircleAvatar(
-          radius: 8.0,
-          backgroundImage: NetworkImage(lightImageUrl),
-        ),
-      ),
-      title: Image.network(centerImageUrl),
-      actions: <Widget>[
-        Image.network(rightImageUrl),
-      ],
-      backgroundColor: Colors.white,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      centerTitle: true,
-    );
-  }
-
   Widget tweetItem({
     required Widget tweetImage,
     required Widget tweetHeader,
@@ -187,7 +194,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     return Column(
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -211,8 +218,9 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     );
   }
 
-  Widget twitterBody(
-      {required Widget Function(BuildContext, int) itemBuilder}) {
+  Widget twitterBody({
+    required Widget Function(BuildContext, int) itemBuilder,
+  }) {
     return ListView.builder(
       itemCount: Data.tweetList.length,
       shrinkWrap: true,
