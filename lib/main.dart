@@ -18,66 +18,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BottomNavigation(),
+      home: const TwitterHomePage(),
     );
   }
 }
 
-class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+class TwitterHomePage extends StatefulWidget {
+  const TwitterHomePage({Key? key}) : super(key: key);
 
   @override
-  _BottomNavigationState createState() => _BottomNavigationState();
+  State<TwitterHomePage> createState() => _TwitterHomePageState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        activeColor: Colors.black87, //  TabBar・選択アイコンの色
-        inactiveColor: Colors.black45, // TabBar・非選択アイコンの色
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home), // TabBar・ホームアイコン
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search), // TabBar・検索アイコン
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.bell), // TabBar・通知アイコン
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.mail), // TabBar・DMアイコン
-          ),
-        ],
-      ),
-      tabBuilder: (BuildContext context, int index) {
-        switch (index) {
-          case 0:
-            return CupertinoTabView(builder: (context) => const Page1());
-          case 1:
-            return CupertinoTabView(builder: (context) => const Page2());
-          case 2:
-            return CupertinoTabView(builder: (context) => const Page3());
-          case 3:
-            return CupertinoTabView(builder: (context) => const Page4());
-          default:
-            return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-}
-
-class Page1 extends StatefulWidget {
-  const Page1({Key? key}) : super(key: key);
-
-  @override
-  State<Page1> createState() => _Page1State();
-}
-
-class _Page1State extends State<Page1> {
+class _TwitterHomePageState extends State<TwitterHomePage> {
   String countFormatter(int count) {
     String countText = '';
     if (count >= 10000) {
@@ -267,17 +220,47 @@ class _Page1State extends State<Page1> {
     );
   }
 
-  Widget twitterFloatingActionButton({required IconData iconData}) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 48.0),
-      child: FloatingActionButton(
-        onPressed: () {},
-        elevation: 0,
-        child: Icon(
-          iconData,
-          size: 32.0,
+  Widget twitterFloatingActionButton({required Icon icon}) {
+    return FloatingActionButton(
+      onPressed: () {},
+      elevation: 0,
+      child: icon,
+    );
+  }
+
+  Widget twitterBottomNavigationBar({
+    required Color backgroundColor,
+    required Icon homeIcon,
+    required Icon searchIcon,
+    required Icon bellIcon,
+    required Icon mailIcon,
+  }) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.black87,
+      unselectedItemColor: Colors.black45,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      iconSize: 28.0,
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: homeIcon,
+          label: '',
         ),
-      ),
+        BottomNavigationBarItem(
+          icon: searchIcon,
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: bellIcon,
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: mailIcon,
+          label: '',
+        ),
+      ],
     );
   }
 
@@ -309,36 +292,21 @@ class _Page1State extends State<Page1> {
 
       // ----------------------- floatingActionButton -----------------------
       floatingActionButton: twitterFloatingActionButton(
-        iconData: CupertinoIcons.add,
+        icon: const Icon(
+          CupertinoIcons.add,
+          size: 32.0,
+        ),
       ), // floatingActionButton
+
+      // ----------------------- bottomNavigationBar -----------------------
+      bottomNavigationBar: twitterBottomNavigationBar(
+        backgroundColor: Colors.white,
+        homeIcon: const Icon(CupertinoIcons.home),
+        searchIcon: const Icon(CupertinoIcons.search),
+        bellIcon: const Icon(CupertinoIcons.bell),
+        mailIcon: const Icon(CupertinoIcons.mail),
+      ), // bottomNavigation
     ); // Scaffold
-  }
-}
-
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class Page4 extends StatelessWidget {
-  const Page4({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 
