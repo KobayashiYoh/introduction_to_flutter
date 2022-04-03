@@ -88,6 +88,13 @@ class _Page1State extends State<Page1> {
     return countText;
   }
 
+  Widget tweetImage(Tweet tweet) {
+    return CircleAvatar(
+      radius: 20.0,
+      backgroundImage: NetworkImage(tweet.userIconUrl),
+    );
+  }
+
   Widget tweetHeader(Tweet tweet) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,35 +148,6 @@ class _Page1State extends State<Page1> {
     );
   }
 
-  Widget tweetFooter() {
-    var rand = math.Random();
-    int replayCount = rand.nextInt(1000);
-    int retweetCount = rand.nextInt(10000) + replayCount;
-    int likesCount = rand.nextInt(1000000) + retweetCount;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        tweetFooterItem(
-          CupertinoIcons.chat_bubble,
-          replayCount,
-        ),
-        tweetFooterItem(
-          CupertinoIcons.arrow_2_squarepath,
-          retweetCount,
-        ),
-        tweetFooterItem(
-          CupertinoIcons.heart,
-          likesCount,
-        ),
-        tweetFooterItem(
-          CupertinoIcons.tray_arrow_up,
-          0,
-        ),
-      ], // <Widget>[]
-    ); // Row
-  }
-
   Widget tweetFooterItem(IconData iconData, int count) {
     String countText = countFormatter(count);
     return Expanded(
@@ -194,77 +172,145 @@ class _Page1State extends State<Page1> {
     );
   }
 
+  Widget tweetFooter() {
+    var rand = math.Random();
+    int replayCount = rand.nextInt(1000);
+    int retweetCount = rand.nextInt(10000) + replayCount;
+    int likesCount = rand.nextInt(1000000) + retweetCount;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        tweetFooterItem(
+          CupertinoIcons.chat_bubble,
+          replayCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.arrow_2_squarepath,
+          retweetCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.heart,
+          likesCount,
+        ),
+        tweetFooterItem(
+          CupertinoIcons.tray_arrow_up,
+          0,
+        ),
+      ], // <Widget>[]
+    ); // Row
+  }
+
+  PreferredSizeWidget twitterAppBar({
+    required Color backgroundColor,
+    required String lightImageUrl,
+    required String centerImageUrl,
+    required String rightImageUrl,
+  }) {
+    return AppBar(
+      leading: Container(
+        padding: const EdgeInsets.all(12.0),
+        child: CircleAvatar(
+          radius: 8.0,
+          backgroundImage: NetworkImage(lightImageUrl),
+        ),
+      ),
+      title: Image.network(centerImageUrl),
+      actions: <Widget>[
+        Image.network(rightImageUrl),
+      ],
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      centerTitle: true,
+    );
+  }
+
+  Widget tweetItem({
+    required Widget tweetImage,
+    required Widget tweetHeader,
+    required Widget tweetBody,
+    required Widget tweetFooter,
+  }) {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              tweetImage,
+              const SizedBox(width: 8.0),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    tweetHeader,
+                    tweetBody,
+                    tweetFooter,
+                  ], // <Widget>[]
+                ), // Column
+              ),
+            ], // <Widget>[]
+          ), // Row
+        ),
+        const Divider(),
+      ], // <Widget>[]
+    );
+  }
+
+  Widget twitterBody(
+      {required Widget Function(BuildContext, int) itemBuilder}) {
+    return ListView.builder(
+      itemCount: Data.tweetList.length,
+      shrinkWrap: true,
+      itemBuilder: itemBuilder, // Column
+    );
+  }
+
+  Widget twitterFloatingActionButton({required IconData iconData}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 48.0),
+      child: FloatingActionButton(
+        onPressed: () {},
+        elevation: 0,
+        child: Icon(
+          iconData,
+          size: 32.0,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-          child: CircleAvatar(
-            backgroundImage:
-                NetworkImage(Data.loginUser.iconUrl), // AppBar・左の画像
-          ),
-        ),
-        title: Image.network(
-          'https://img.icons8.com/color/48/000000/twitter--v1.png', // AppBar・中央の画像
-        ),
-        actions: <Widget>[
-          Image.network(
-            'https://img.icons8.com/material-outlined/24/000000/sparkling.png', // AppBar・右の画像
-          ),
-        ],
-        foregroundColor: Colors.black87, // AppBar・アイコンの色
-        backgroundColor: Colors.white, // AppBar・背景色
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-      ), // AppBar,
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: Data.tweetList.length,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) => Column(
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 24.0,
-                      backgroundImage:
-                          NetworkImage(Data.tweetList[index].userIconUrl),
-                    ),
-                    const SizedBox(width: 8.0),
-                    Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          tweetHeader(Data.tweetList[index]),
-                          tweetBody(Data.tweetList[index]),
-                          tweetFooter(),
-                        ], // <Widget>[]
-                      ), // Column
-                    ),
-                  ], // <Widget>[]
-                ), // Row
-              ),
-              const Divider(),
-            ], // <Widget>[]
-          ), // Column
-        ),
-      ),
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 48.0),
-        child: FloatingActionButton(
-          onPressed: () {},
-          elevation: 0,
-          child: const Icon(
-            Icons.add, // FloatingActionButton（画面右下の青丸ボタン）・新規投稿アイコン
-            size: 32.0,
-          ),
-        ),
-      ),
+      // ------------------------------ appBar ------------------------------
+      appBar: twitterAppBar(
+        backgroundColor: Colors.white,
+        lightImageUrl: Data.loginUser.iconUrl,
+        centerImageUrl:
+            'https://img.icons8.com/color/48/000000/twitter--v1.png',
+        rightImageUrl:
+            'https://img.icons8.com/material-outlined/24/000000/sparkling.png',
+      ), // appBar
+
+      // ------------------------------ body ------------------------------
+      body: twitterBody(
+        itemBuilder: (BuildContext context, int index) {
+          Tweet tweet = Data.tweetList[index];
+          return tweetItem(
+            tweetImage: tweetImage(tweet),
+            tweetHeader: tweetHeader(tweet),
+            tweetBody: tweetBody(tweet),
+            tweetFooter: tweetFooter(),
+          );
+        },
+      ), // body
+
+      // ----------------------- floatingActionButton -----------------------
+      floatingActionButton: twitterFloatingActionButton(
+        iconData: CupertinoIcons.add,
+      ), // floatingActionButton
     ); // Scaffold
   }
 }
