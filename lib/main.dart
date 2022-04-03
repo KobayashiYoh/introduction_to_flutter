@@ -360,9 +360,9 @@ class Data {
     Tweet(
       userIconUrl:
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'nameeeeeeee',
-      userId: 'idddddddddddddddddddddddddddddd',
-      text: 'こんにちは\nはじめまして\nうっひょー',
+      userName: 'name',
+      userId: 'id',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -370,7 +370,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -378,7 +378,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -386,7 +386,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -394,7 +394,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -402,7 +402,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -410,7 +410,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
     Tweet(
@@ -418,23 +418,7 @@ class Data {
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
       userName: 'name',
       userId: 'id',
-      text: '投稿文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: '投稿文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: '投稿文',
+      text: 'ツイート本文',
       postImage: '',
     ),
   ]; // tweetList
