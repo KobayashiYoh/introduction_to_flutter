@@ -242,11 +242,11 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     );
   }
 
-  Widget twitterFloatingActionButton({required Icon icon}) {
+  Widget twitterButton() {
     return FloatingActionButton(
       onPressed: () {},
       elevation: 0,
-      child: icon,
+      child: const Icon(CupertinoIcons.add),
     );
   }
 
@@ -313,12 +313,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
       ), // body
 
       // ----------------------- floatingActionButton -----------------------
-      floatingActionButton: twitterFloatingActionButton(
-        icon: const Icon(
-          CupertinoIcons.add,
-          size: 32.0,
-        ),
-      ), // floatingActionButton
+      floatingActionButton: twitterButton(),
 
       // ----------------------- bottomNavigationBar -----------------------
       bottomNavigationBar: twitterBottomNavigationBar(
