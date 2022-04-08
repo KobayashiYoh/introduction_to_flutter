@@ -55,7 +55,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
 
   PreferredSizeWidget twitterAppBar({
     required Color backgroundColor,
-    required String lightImageUrl,
+    required String leftImageUrl,
     required String centerImageUrl,
     required String rightImageUrl,
   }) {
@@ -64,18 +64,23 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
         padding: const EdgeInsets.all(12.0),
         child: CircleAvatar(
           radius: 8.0,
-          backgroundImage: NetworkImage(lightImageUrl),
+          backgroundImage: NetworkImage(leftImageUrl),
         ),
       ),
       title: SizedBox(
         width: 44.0,
         height: 44.0,
-        child: Image.network(centerImageUrl),
+        child: centerImageUrl.isEmpty
+            ? const SizedBox.shrink()
+            : Image.network(
+                centerImageUrl,
+                errorBuilder: (c, o, s) => const SizedBox.shrink(),
+              ),
       ),
       actions: <Widget>[
-        Image.network(rightImageUrl),
+        if (rightImageUrl.isNotEmpty) Image.network(rightImageUrl),
       ],
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       elevation: 0,
       automaticallyImplyLeading: false,
       centerTitle: true,
@@ -251,14 +256,12 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
   }
 
   Widget twitterBottomNavigationBar({
-    required Color backgroundColor,
     required Icon homeIcon,
     required Icon searchIcon,
     required Icon bellIcon,
     required Icon mailIcon,
   }) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white,
       selectedItemColor: Colors.black87,
       unselectedItemColor: Colors.black45,
       showSelectedLabels: false,
@@ -290,38 +293,49 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // ------------------------------ appBar ------------------------------
+      // backgroundColor: Colors.white,
+      // leftImageUrl: Data.loginUser.iconUrl,  // この行は変更しなくてOK
+      // centerImageUrl: 'https://img.icons8.com/color/48/000000/twitter--v1.png',
+      // rightImageUrl: 'https://img.icons8.com/material-outlined/24/000000/sparkling.png',
       appBar: twitterAppBar(
-        backgroundColor: Colors.white,
-        lightImageUrl: Data.loginUser.iconUrl,
-        centerImageUrl:
-            'https://img.icons8.com/color/48/000000/twitter--v1.png',
-        rightImageUrl:
-            'https://img.icons8.com/material-outlined/24/000000/sparkling.png',
+        backgroundColor: Colors.blue,
+        leftImageUrl: Data.loginUser.iconUrl, // この行は変更しなくてOK
+        centerImageUrl: '',
+        rightImageUrl: '',
       ), // appBar
 
       // ------------------------------ body ------------------------------
+      // tweetImage: tweetImage(tweet),
+      // tweetHeader: tweetHeader(tweet),
+      // tweetBody: tweetBody(tweet),
+      // tweetFooter: tweetFooter(),
       body: twitterBody(
         itemBuilder: (BuildContext context, int index) {
+          // ignore: unused_local_variable
           Tweet tweet = Data.tweetList[index];
           return tweetItem(
-            tweetImage: tweetImage(tweet),
-            tweetHeader: tweetHeader(tweet),
-            tweetBody: tweetBody(tweet),
-            tweetFooter: tweetFooter(),
+            tweetImage: Container(),
+            tweetHeader: Container(),
+            tweetBody: Container(),
+            tweetFooter: Container(),
           );
         },
       ), // body
 
       // ----------------------- floatingActionButton -----------------------
-      floatingActionButton: twitterButton(),
+      // floatingActionButton: twitterButton(),
+      floatingActionButton: null,
 
       // ----------------------- bottomNavigationBar -----------------------
       bottomNavigationBar: twitterBottomNavigationBar(
-        backgroundColor: Colors.white,
-        homeIcon: const Icon(CupertinoIcons.home),
-        searchIcon: const Icon(CupertinoIcons.search),
-        bellIcon: const Icon(CupertinoIcons.bell),
-        mailIcon: const Icon(CupertinoIcons.mail),
+        // homeIcon: const Icon(CupertinoIcons.home),
+        // searchIcon: const Icon(CupertinoIcons.search),
+        // bellIcon: const Icon(CupertinoIcons.bell),
+        // mailIcon: const Icon(CupertinoIcons.mail),
+        homeIcon: const Icon(CupertinoIcons.rectangle),
+        searchIcon: const Icon(CupertinoIcons.rectangle),
+        bellIcon: const Icon(CupertinoIcons.rectangle),
+        mailIcon: const Icon(CupertinoIcons.rectangle),
       ), // bottomNavigation
     ); // Scaffold
   }
@@ -366,62 +380,6 @@ class Data {
 
   // ------------------------- ツイートのデータ -------------------------
   static List<Tweet> tweetList = [
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
-    Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
-      userName: 'name',
-      userId: 'id',
-      text: 'ツイート本文',
-      postImage: '',
-    ),
     Tweet(
       userIconUrl:
           'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
