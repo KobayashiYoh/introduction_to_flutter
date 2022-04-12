@@ -176,7 +176,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
     );
   }
 
-  Widget tweetFooter() {
+  Widget tweetFooter(Tweet tweet) {
     var rand = math.Random();
     int replayCount = rand.nextInt(500);
     int retweetCount = rand.nextInt(10000) + replayCount;
@@ -308,7 +308,7 @@ class _TwitterHomePageState extends State<TwitterHomePage> {
       // tweetImage: tweetImage(tweet),
       // tweetHeader: tweetHeader(tweet),
       // tweetBody: tweetBody(tweet),
-      // tweetFooter: tweetFooter(),
+      // tweetFooter: tweetFooter(tweet),
       body: twitterBody(
         itemBuilder: (BuildContext context, int index) {
           // ignore: unused_local_variable
@@ -372,8 +372,7 @@ class Tweet {
 class Data {
   // ---------------------- ログインユーザーのデータ ---------------------
   static User loginUser = User(
-    iconUrl:
-        'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+    iconUrl: 'https://lohas.nicoseiga.jp/thumb/10871615i?1640475082',
     name: 'name',
     id: 'id',
   ); // loginUser
@@ -381,8 +380,7 @@ class Data {
   // ------------------------- ツイートのデータ -------------------------
   static List<Tweet> tweetList = [
     Tweet(
-      userIconUrl:
-          'https://pbs.twimg.com/media/FPTPnEvVQAQ6C9z?format=jpg&name=360x360',
+      userIconUrl: 'https://lohas.nicoseiga.jp/thumb/10871615i?1640475082',
       userName: 'name',
       userId: 'id',
       text: 'ツイート本文',
